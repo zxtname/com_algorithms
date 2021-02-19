@@ -1,5 +1,5 @@
 //排序算法
-let arr=[6,9,3,4,6,5,1];
+let arr = [6, 9, 3, 4, 6, 5, 1];
 //sort
 // console.log(arr.sort((a,b)=>a-b));
 // console.log(arr.sort((a,b)=>b-a));
@@ -17,15 +17,15 @@ let arr=[6,9,3,4,6,5,1];
 //           [array[index],array[j]]=[array[j],array[index]] ;       
 //         }      
 //       }
-      
+
 //     }
 //   }
 // }
 // f1(arr)
 // console.log(arr)
 //冒泡算法
-   // 声明一个变量，作为标志位
-    // 如果某次循环完后，没有任何两数进行交换，就将标志位设置为 true，表示排序完成
+// 声明一个变量，作为标志位
+// 如果某次循环完后，没有任何两数进行交换，就将标志位设置为 true，表示排序完成
 
 // let f2=array=>{
 //   if(array instanceof Array){    
@@ -58,7 +58,60 @@ let arr=[6,9,3,4,6,5,1];
 //   }
 // }
 // f3(arr)
+//快速排序算法
+//分组
+let a = [6, 9, 3, 4, 6, 5, 1];
+let doPartition=( left, right, pivot)=> {
+        
+  let leftPre=left-1;
+  let rightPre=right;
+  let temp;
+  
+  let temp1;
+  
+  while(true) {
+      
+    while(leftPre<right && a[++leftPre]<pivot) {
+        ;
+    }
+    
+    while(rightPre>0 && a[--rightPre]>pivot) {
+        ;
+    }
+      
+    if(leftPre>=rightPre) {
+        break;
+    }else {
+        
+        temp=a[leftPre];
+        a[leftPre]=a[rightPre];
+        a[rightPre]=temp;
+
+    }          
+    
+  }
+  
+   temp1 =a[leftPre];    
+  a[leftPre]=a[right];
+  a[right]=temp1;      
+  return leftPre; 
+}
 
 
+//下边是主要算法的简化代码， 理解简化代码后还要对其进行精益求精
+let quickSort = (left, right) => {        
+    if(right-left<=0)
+        return;
+    else {
+        
+        let pivot=a[right];
+        let partition=doPartition(left,right,pivot);        
+        quickSort(left,partition-1);
+        quickSort(partition+1,right);
+    }    
+}
 
-console.log(arr)
+quickSort(0,a.length-1)
+console.log(a);
+// console.log(partition(arr))
+// console.log(arr)
